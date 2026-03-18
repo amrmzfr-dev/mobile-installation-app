@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "VoltInstall Pro",
+    "slug": "voltinstall-pro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.voltinstall.pro"
+    },
+    "android": {
+      "package": "com.voltinstall.pro",
+      "adaptiveIcon": {
+        "backgroundColor": "#1DAA72"
+      }
+    },
+    "web": {},
+    "plugins": [
+      "expo-asset",
+      "expo-font"
+    ]
+  }
+}
