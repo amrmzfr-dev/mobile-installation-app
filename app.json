@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "VoltInstall Pro",
-    "slug": "voltinstall-pro",
+    "name": "C0 Installer",
+    "slug": "czero-installer",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -14,12 +14,19 @@
       "package": "com.voltinstall.pro",
       "adaptiveIcon": {
         "backgroundColor": "#1DAA72"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBnTurCvJzGbeNzGehdS7lYpWgvcGFgci0"
+        }
       }
     },
     "web": {},
     "plugins": [
       "expo-asset",
-      "expo-font"
+      "expo-font",
+      "expo-secure-store",
+      "@react-native-community/datetimepicker"
     ]
   }
 }

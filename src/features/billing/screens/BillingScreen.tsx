@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { Ionicons } from '@expo/vector-icons';
 import { Spacing, Typography } from '../../../theme';
 import { useTheme } from '../../../context/ThemeContext';
 import ScreenWrapper from '../../../components/layout/ScreenWrapper';
@@ -8,8 +9,6 @@ import NotificationBell from '../../../components/common/NotificationBell';
 import SearchBar from '../../../components/common/SearchBar';
 import FilterTabs from '../../../components/common/FilterTabs';
 import type { FilterOption } from '../../../components/common/FilterTabs';
-import InvoiceCard from '../components/InvoiceCard';
-import { INVOICES } from '../data/mock';
 
 const FILTER_OPTIONS: FilterOption[] = [
   { id: 'all', label: 'All' },
@@ -22,20 +21,12 @@ export default function BillingScreen() {
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const filteredInvoices = useMemo(() => {
-    return INVOICES.filter((inv) => {
-      const matchesFilter = activeFilter === 'all' || inv.status === activeFilter;
-      const matchesSearch = inv.invoiceId.toLowerCase().includes(search.toLowerCase());
-      return matchesFilter && matchesSearch;
-    });
-  }, [search, activeFilter]);
-
   return (
     <ScreenWrapper>
       <StatusBar style={colors.statusBar} />
       <View style={styles.header}>
         <Text style={[styles.headerTitle, { color: colors.textPrimary }]}>Billing</Text>
-        <NotificationBell count={2} />
+        <NotificationBell count={0} />
       </View>
 
       <SearchBar
@@ -44,19 +35,25 @@ export default function BillingScreen() {
         onChangeText={setSearch}
       />
 
-      <FilterTabs
-        options={FILTER_OPTIONS}
-        activeId={activeFilter}
-        onSelect={setActiveFilter}
-      />
+      <View style={styles.filterWrapper}>
+        <FilterTabs
+          options={FILTER_OPTIONS}
+          activeId={activeFilter}
+          onSelect={setActiveFilter}
+        />
+      </View>
 
-      <FlatList
-        data={filteredInvoices}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <InvoiceCard invoice={item} />}
-        contentContainerStyle={styles.list}
-        showsVerticalScrollIndicator={false}
-      />
+      <View style={styles.emptyContainer}>
+        <View style={[styles.emptyCard, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View style={[styles.emptyIconWrap, { backgroundColor: colors.primaryLight }]}>
+            <Ionicons name="receipt-outline" size={36} color={colors.primary} />
+          </View>
+          <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>No Invoices Yet</Text>
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+            Your billing history will appear here once invoices are generated for completed jobs.
+          </Text>
+        </View>
+      </View>
     </ScreenWrapper>
   );
 }
@@ -73,8 +70,38 @@ const styles = StyleSheet.create({
   headerTitle: {
     ...Typography.h1,
   },
-  list: {
+  filterWrapper: {
+    marginBottom: Spacing.md,
+  },
+  emptyContainer: {
+    flex: 1,
     paddingHorizontal: Spacing.base,
-    paddingBottom: Spacing.xl,
+    justifyContent: 'center',
+    paddingBottom: 60,
+  },
+  emptyCard: {
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingVertical: Spacing.xl * 1.5,
+    paddingHorizontal: Spacing.xl,
+    alignItems: 'center',
+    gap: Spacing.md,
+  },
+  emptyIconWrap: {
+    width: 72,
+    height: 72,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: Spacing.sm,
+  },
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  emptyText: {
+    fontSize: 14,
+    textAlign: 'center',
+    lineHeight: 20,
   },
 });

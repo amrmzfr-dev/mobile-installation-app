@@ -69,7 +69,7 @@ export const ALERTS: AlertItem[] = [
 ];
 
 export const NEWS: NewsItem[] = [
-  { id: '1', title: 'Tesla opens NACS for all', time: '2h ago', emoji: '🚗' },
-  { id: '2', title: 'New Level 3 charging tech', time: '5h ago', emoji: '⚡' },
-  { id: '3', title: 'CA State Rebates updated', time: '1d ago', emoji: '📋' },
+  { id: '1', title: 'Updated Terms & Conditions — Review required by Nov 30', time: '2h ago', emoji: '📄' },
+  { id: '2', title: 'New PPE Requirements effective Dec 1 — Hard hats mandatory on all sites', time: '1d ago', emoji: '⛑️' },
+  { id: '3', title: 'Holiday Schedule — Office closed Dec 25 – Jan 1', time: '2d ago', emoji: '📅' },
 ];

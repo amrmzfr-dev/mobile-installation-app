@@ -51,20 +51,21 @@ export default function FilterTabs({ options, activeId, onSelect }: Props) {
 
 const styles = StyleSheet.create({
   scroll: {
-    marginBottom: Spacing.lg,
-    flexShrink: 0,
     flexGrow: 0,
   },
   container: {
     paddingHorizontal: Spacing.base,
+    paddingRight: Spacing.xl,
     flexDirection: 'row',
-    gap: Spacing.sm,
+    gap: Spacing.md,
+    alignItems: 'center',
   },
   tab: {
     paddingHorizontal: Spacing.base,
-    paddingVertical: Spacing.sm,
+    paddingVertical: 7,
     borderRadius: 20,
     borderWidth: 1.5,
+    flexShrink: 0,
   },
   label: {
     fontSize: 13,
